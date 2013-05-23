@@ -103,7 +103,7 @@
                   title : 'Removing tag',
                   text  : 'x'
               }).click(function () {
-                  return $('#' + id).removeTag(escape(value));
+                  return $('#' + id).removeTag(encodeURI(value));
               })
           ).insertBefore('#' + id + '_addTag');
 
@@ -136,7 +136,7 @@
     };
 
   $.fn.removeTag = function(value) {
-      value = unescape(value);
+      value = decodeURI(value);
       this.each(function() {
         var id = $(this).attr('id'),
             old = $(this).val().split(delimiter[id]),
@@ -314,7 +314,7 @@
                var last_tag = $(this).closest('.tagsinput').find('.tag:last').text();
                var id = $(this).attr('id').replace(/_tag$/, '');
                last_tag = last_tag.replace(/[\s]+x$/, '');
-               $('#' + id).removeTag(escape(last_tag));
+               $('#' + id).removeTag(encodeURI(last_tag));
                $(this).trigger('focus');
             }
           });
